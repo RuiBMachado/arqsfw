@@ -11,7 +11,7 @@ Alterações que fiz
 - alterei nome de método mostra_luminusidade para mostra_luminosidade
 - alterei print do mostra_temperatura
 - alterei print do mostra_luminosidade
-
+- meti comentarios no codigo todo
 
 Na classe weatherStation:
 -instanciei os vectores fora.
@@ -20,21 +20,33 @@ Classe view:
 
 método mostra_temperatura()
 - localDate fora do if
+- criei variavel localdate fora do if
+- criei vector valores assim so chama uma vez o get.
 
 método mostra_humidade()
 - localDate fora do if
+- criei variavel localdate fora do if
+- criei vector valores assim so chama uma vez o get.
 método mostra_mostra_pressao_atm()
 - localDate fora do if
+- criei variavel localdate fora do if
+- criei vector valores assim so chama uma vez o get.
 método mostra_audio()
 - localDate fora do if
+- criei variavel localdate fora do if
+- criei vector valores assim so chama uma vez o get.
 método mostra_luminosidade()
 - localDate fora do if
+- criei variavel localdate fora do if
+- criei vector valores assim so chama uma vez o get.
+
 
 
 método mostra_media
 - sum fora do switch
 - mudança do comentario da humidade (estava temperatura)
 - tirei o “false!=“  não faz sentido
+- criei variavel tamanho, assim nao chama o get().size() no print
 
 metodo mostra_max_minimo_tempertura()
 - tirei o “false!=“  não faz sentido
