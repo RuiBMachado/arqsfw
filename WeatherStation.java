@@ -60,55 +60,55 @@ public class WeatherStation implements WeatherObserver,Observable {
      */
     @Override
     public void update(int id, Vector<Integer> values){
-
+        
+        Vector<Integer> new_vector  =  new Vector<Integer>();
+        Vector<Integer> valores;
+        
         switch (id) {
             case 1: // XDK exterior
-
-                if (this.temperatura.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-                    val_temp.add(values.elementAt(0));
+                
+                valores=this.temperatura.get(LocalDate.now());
+                if (valores != null){
+                    valores.add(values.elementAt(0));
                 } else
                 {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
+                   
                     new_vector.add(values.elementAt(0));
                     temperatura.put(LocalDate.now(), new_vector);
                 }
-                if (this.humidade.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = humidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(1));
+                
+                valores=this.humidade.get(LocalDate.now());
+                if (valores != null){
+                    valores.add(values.elementAt(1));
                 } else
                 {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
                     new_vector.add(values.elementAt(1));
                     humidade.put(LocalDate.now(), new_vector);
                 }
-
-                if (this.pressao_atm.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
-                    val_temp.add(values.elementAt(2));
+                
+                valores =this.pressao_atm.get(LocalDate.now()) ;
+                if (valores!= null){
+                    valores.add(values.elementAt(2));
                 } else
                 {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
                     new_vector.add(values.elementAt(2));
                     pressao_atm.put(LocalDate.now(), new_vector);
                 }
 
-                if (this.audio.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = audio.get(LocalDate.now());
-                    val_temp.add(values.elementAt(3));
+                valores=this.audio.get(LocalDate.now());
+                if (valores != null){
+                    valores.add(values.elementAt(3));
                 } else
                 {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
                     new_vector.add(values.elementAt(3));
                     audio.put(LocalDate.now(), new_vector);
                 }
-                if (this.luminosidade.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(4));
+                
+                valores=this.luminosidade.get(LocalDate.now());
+                if (valores != null){
+                    valores.add(values.elementAt(4));
                 } else
                 {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
                     new_vector.add(values.elementAt(4));
                     luminosidade.put(LocalDate.now(), new_vector);
                 }

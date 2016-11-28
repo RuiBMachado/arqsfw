@@ -7,6 +7,7 @@ package tp3;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -30,9 +31,11 @@ public class View implements Observer {
      */
     public void mostra_temperatura(HashMap<LocalDate, Vector<Integer>> temperatura) {
         int i = -100;
-        if (temperatura.containsKey(LocalDate.now())) {
-            int size = temperatura.get(LocalDate.now()).size();
-            i = temperatura.get(LocalDate.now()).elementAt(size - 1);
+        LocalDate localDate = LocalDate.now();
+        
+        if (temperatura.containsKey(localDate)) {
+            int size = temperatura.get(localDate).size();
+            i = temperatura.get(localDate).elementAt(size - 1);
         }
         System.out.println("Temperatura Actual: " + i);
     }
@@ -44,36 +47,44 @@ public class View implements Observer {
      */
     public void mostra_humidade(HashMap<LocalDate, Vector<Integer>> humidade) {
         int value = -100;
-        if (humidade.containsKey(LocalDate.now())) {
-            int size = humidade.get(LocalDate.now()).size();
-            value = humidade.get(LocalDate.now()).elementAt(size - 1);
+         LocalDate localDate = LocalDate.now();
+
+        if (humidade.containsKey(localDate)) {
+            int size = humidade.get(localDate).size();
+            value = humidade.get(localDate).elementAt(size - 1);
         }
         System.out.println("Humidade Actual: " + value);
     }
 
     public void mostra_pressao_atm(HashMap<LocalDate, Vector<Integer>> pressao_atm) {
         int value = -100;
-        if (pressao_atm.containsKey(LocalDate.now())) {
-            int size = pressao_atm.get(LocalDate.now()).size();
-            value = pressao_atm.get(LocalDate.now()).elementAt(size - 1);
+        LocalDate localDate = LocalDate.now();
+
+        if (pressao_atm.containsKey(localDate)) {
+            int size = pressao_atm.get(localDate).size();
+            value = pressao_atm.get(localDate).elementAt(size - 1);
         }
         System.out.println("pressão atmosférica actual: " + value);
     }
 
     public void mostra_audio(HashMap<LocalDate, Vector<Integer>> audio) {
         int value = -100;
-        if (audio.containsKey(LocalDate.now())) {
-            int size = audio.get(LocalDate.now()).size();
-            value = audio.get(LocalDate.now()).elementAt(size - 1);
+        LocalDate localDate = LocalDate.now();
+
+        if (audio.containsKey(localDate)) {
+            int size = audio.get(localDate).size();
+            value = audio.get(localDate).elementAt(size - 1);
         }
         System.out.println("Audio actual: " + value);
     }
 
     public void mostra_luminosidade(HashMap<LocalDate, Vector<Integer>> luminosidade) {
         int value = -100;
-        if (luminosidade.containsKey(LocalDate.now())) {
-            int size = luminosidade.get(LocalDate.now()).size();
-            value = luminosidade.get(LocalDate.now()).elementAt(size - 1);
+        LocalDate localDate = LocalDate.now();
+
+        if (luminosidade.containsKey(localDate)) {
+            int size = luminosidade.get(localDate).size();
+            value = luminosidade.get(localDate).elementAt(size - 1);
         }
         System.out.println("Luminosidade actual: " + value);
     }
@@ -85,12 +96,13 @@ public class View implements Observer {
      * @param sensor sensor a calcular: 0 temperatura
      */
     public void mostra_media(LocalDate data, int sensor, HashMap<LocalDate, Vector<Integer>> temperatura, HashMap<LocalDate, Vector<Integer>> humidade) {
-
+        int sum=0;
+        
         switch (sensor) {
             case 0: //temperatura
-                if (false != temperatura.containsKey(data)) {
+                if ( temperatura.containsKey(data)) {
 
-                    int sum = 0;
+                    
                     for (Integer val : temperatura.get(data)) {
                         sum += val;
                     }
@@ -98,10 +110,10 @@ public class View implements Observer {
                     System.out.println("Média temperatura: " + sum / temperatura.get(data).size());
                 }
                 break;
-            case 1: //temperatura
-                if (false != humidade.containsKey(data)) {
+            case 1: //humidade
+                if ( humidade.containsKey(data)) {
 
-                    int sum = 0;
+                   
                     for (Integer val : humidade.get(data)) {
                         sum += val;
                     }
@@ -120,7 +132,7 @@ public class View implements Observer {
      */
     public void mostra_max_minimo_temperatura(LocalDate data, HashMap<LocalDate, Vector<Integer>> temperatura) {
 
-        if (false != temperatura.containsKey(data)) {
+        if (temperatura.containsKey(data)) {
             Vector<Integer> v = temperatura.get(data);
             int max = Collections.max(v);
             int min = Collections.min(v);
@@ -130,7 +142,7 @@ public class View implements Observer {
 
     public void mostra_max_minimo_humidade(LocalDate data,  HashMap<LocalDate, Vector<Integer>> humidade) {
 
-        if (false != humidade.containsKey(data)) {
+        if (humidade.containsKey(data)) {
             Vector<Integer> v = humidade.get(data);
             int max = Collections.max(v);
             int min = Collections.min(v);
@@ -140,7 +152,7 @@ public class View implements Observer {
 
     public void mostra_max_minimo_pressao_atm(LocalDate data, HashMap<LocalDate, Vector<Integer>> pressao_atm) {
 
-        if (false != pressao_atm.containsKey(data)) {
+        if (pressao_atm.containsKey(data)) {
             Vector<Integer> v = pressao_atm.get(data);
             int max = Collections.max(v);
             int min = Collections.min(v);
@@ -150,7 +162,7 @@ public class View implements Observer {
 
     public void mostra_max_minimo_audio(LocalDate data, HashMap<LocalDate, Vector<Integer>> audio) {
 
-        if (false != audio.containsKey(data)) {
+        if (audio.containsKey(data)) {
             Vector<Integer> v = audio.get(data);
             int max = Collections.max(v);
             int min = Collections.min(v);
@@ -160,7 +172,7 @@ public class View implements Observer {
 
     public void mostra_max_minimo_luminosidade(LocalDate data, HashMap<LocalDate, Vector<Integer>> luminosidade) {
 
-        if (false != luminosidade.containsKey(data)) {
+        if (luminosidade.containsKey(data)) {
             Vector<Integer> v = luminosidade.get(data);
             int max = Collections.max(v);
             int min = Collections.min(v);
@@ -177,14 +189,14 @@ public class View implements Observer {
     public void mostra_ultimos_dias(int sensor, int dias, HashMap<LocalDate, Vector<Integer>> temperatura) {
 
         int dias_counter = dias - 1;
-        HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<LocalDate, Vector<Integer>>();
+        HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<>();
         Vector max_min_values = new Vector();
         switch (sensor) {
             case 0: //temperatura
                 LocalDate today = LocalDate.now();
                 while (dias_counter >= 0) {
 
-                    if (false != temperatura.containsKey(today.minusDays(dias_counter))) {
+                    if (temperatura.containsKey(today.minusDays(dias_counter))) {
                         Vector<Integer> temp_values = temperatura.get(today.minusDays(dias_counter));
                         max_min_values.add(Collections.max(temp_values));
                         max_min_values.add(Collections.min(temp_values));
