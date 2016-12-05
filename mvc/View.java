@@ -31,9 +31,9 @@ public class View implements Observer {
     public void mostra_temperatura(HashMap<LocalDate, Vector<Integer>> temperatura) {
         int i = -100;
         LocalDate localDate = LocalDate.now();
-        
+
         if (temperatura.containsKey(localDate)) {
-            Vector<Integer> valores =temperatura.get(localDate);
+            Vector<Integer> valores = temperatura.get(localDate);
             int size = valores.size();
             i = valores.elementAt(size - 1);
         }
@@ -47,18 +47,19 @@ public class View implements Observer {
      */
     public void mostra_humidade(HashMap<LocalDate, Vector<Integer>> humidade) {
         int value = -100;
-         LocalDate localDate = LocalDate.now();
+        LocalDate localDate = LocalDate.now();
 
         if (humidade.containsKey(localDate)) {
-            Vector<Integer> valores=humidade.get(localDate);
+            Vector<Integer> valores = humidade.get(localDate);
             int size = valores.size();
             value = valores.elementAt(size - 1);
         }
         System.out.println("Humidade Actual: " + value);
     }
 
-     /**
-     * Funcionalidade: Mostrar o valor mais recente do sensor de pressão atmosférica
+    /**
+     * Funcionalidade: Mostrar o valor mais recente do sensor de pressão
+     * atmosférica
      *
      * @param pressao_atm
      */
@@ -66,13 +67,13 @@ public class View implements Observer {
         int value = -100;
         LocalDate localDate = LocalDate.now();
         if (pressao_atm.containsKey(localDate)) {
-            Vector<Integer> valores =pressao_atm.get(localDate);
+            Vector<Integer> valores = pressao_atm.get(localDate);
             int size = valores.size();
-            value =valores.elementAt(size - 1);
+            value = valores.elementAt(size - 1);
         }
         System.out.println("pressão atmosférica actual: " + value);
     }
-    
+
     /**
      * Funcionalidade: Mostrar o valor mais recente do sensor de audio
      *
@@ -83,15 +84,14 @@ public class View implements Observer {
         LocalDate localDate = LocalDate.now();
 
         if (audio.containsKey(localDate)) {
-            Vector<Integer> valores=audio.get(localDate);
+            Vector<Integer> valores = audio.get(localDate);
             int size = valores.size();
             value = valores.elementAt(size - 1);
         }
         System.out.println("Audio actual: " + value);
     }
 
-    
-     /**
+    /**
      * Funcionalidade: Mostrar o valor mais recente do sensor de luminosidade
      *
      * @param luminosidade
@@ -101,7 +101,7 @@ public class View implements Observer {
         LocalDate localDate = LocalDate.now();
 
         if (luminosidade.containsKey(localDate)) {
-            Vector<Integer> valores=luminosidade.get(localDate);
+            Vector<Integer> valores = luminosidade.get(localDate);
             int size = valores.size();
             value = valores.elementAt(size - 1);
         }
@@ -109,7 +109,8 @@ public class View implements Observer {
     }
 
     /**
-     * Funcionalidade: mostra a média da temperatura ou humidade para um determinado dia 
+     * Funcionalidade: mostra a média da temperatura ou humidade para um
+     * determinado dia
      *
      * @param data dia a considerar para a média
      * @param sensor sensor a calcular: 0 temperatura
@@ -117,13 +118,12 @@ public class View implements Observer {
      * @param humidade
      */
     public void mostra_media(LocalDate data, int sensor, HashMap<LocalDate, Vector<Integer>> temperatura, HashMap<LocalDate, Vector<Integer>> humidade) {
-        int sum=0;
-        int tamanho=0;
+        int sum = 0;
+        int tamanho = 0;
         switch (sensor) {
             case 0: //temperatura
-                if ( temperatura.containsKey(data)) {
+                if (temperatura.containsKey(data)) {
 
-                    
                     for (Integer val : temperatura.get(data)) {
                         sum += val;
                         tamanho++;
@@ -133,9 +133,8 @@ public class View implements Observer {
                 }
                 break;
             case 1: //humidade
-                if ( humidade.containsKey(data)) {
+                if (humidade.containsKey(data)) {
 
-                   
                     for (Integer val : humidade.get(data)) {
                         sum += val;
                         tamanho++;
@@ -148,7 +147,8 @@ public class View implements Observer {
     }
 
     /**
-     * Funcionalidade: Mostar os valores máximos e minimos do sensor de temperatura
+     * Funcionalidade: Mostar os valores máximos e minimos do sensor de
+     * temperatura
      *
      * @param data dia a considerar para recolher o valor máximo nosidade
      * @param temperatura
@@ -162,13 +162,14 @@ public class View implements Observer {
             System.out.println("Max temperatura: " + max + " Min temperatura: " + min);
         }
     }
+
     /**
      * Funcionalidade: Mostar os valores máximos e minimos do sensor de humidade
      *
      * @param data dia a considerar para recolher o valor máximo nosidade
      * @param humidade
      */
-    public void mostra_max_minimo_humidade(LocalDate data,  HashMap<LocalDate, Vector<Integer>> humidade) {
+    public void mostra_max_minimo_humidade(LocalDate data, HashMap<LocalDate, Vector<Integer>> humidade) {
 
         if (humidade.containsKey(data)) {
             Vector<Integer> v = humidade.get(data);
@@ -179,7 +180,8 @@ public class View implements Observer {
     }
 
     /**
-     * Funcionalidade: Mostar os valores máximos e minimos do sensor de pressão atmosférica
+     * Funcionalidade: Mostar os valores máximos e minimos do sensor de pressão
+     * atmosférica
      *
      * @param data dia a considerar para recolher o valor máximo nosidade
      * @param pressao_atm
@@ -193,7 +195,7 @@ public class View implements Observer {
             System.out.println("Max pressão atmosférica: " + max + " Min pressão atmosférica: " + min);
         }
     }
-    
+
     /**
      * Funcionalidade: Mostar os valores máximos e minimos do sensor de audio
      *
@@ -211,7 +213,8 @@ public class View implements Observer {
     }
 
     /**
-     * Funcionalidade: Mostar os valores máximos e minimos do sensor de luminosidade
+     * Funcionalidade: Mostar os valores máximos e minimos do sensor de
+     * luminosidade
      *
      * @param data dia a considerar para recolher o valor máximo nosidade
      * @param luminosidade
@@ -238,21 +241,19 @@ public class View implements Observer {
         int dias_counter = dias - 1;
         HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<>();
         Vector max_min_values = new Vector();
-        switch (sensor) {
-            case 0: //temperatura
-                LocalDate today = LocalDate.now();
-                while (dias_counter >= 0) {
 
-                    if (temperatura.containsKey(today.minusDays(dias_counter))) {
-                        Vector<Integer> temp_values = temperatura.get(today.minusDays(dias_counter));
-                        max_min_values.add(Collections.max(temp_values));
-                        max_min_values.add(Collections.min(temp_values));
-                        last_values.put(today.minusDays(dias_counter), max_min_values);
+        LocalDate today = LocalDate.now();
+        while (dias_counter >= 0) {
 
-                    }
-                    dias_counter -= 1;
-                }
-                break;
+            if (temperatura.containsKey(today.minusDays(dias_counter))) {
+                Vector<Integer> temp_values = temperatura.get(today.minusDays(dias_counter));
+                max_min_values.add(Collections.max(temp_values));
+                max_min_values.add(Collections.min(temp_values));
+                last_values.put(today.minusDays(dias_counter), max_min_values);
+
+            }
+            dias_counter -= 1;
+
         }
         System.out.println("Valores máximos e mínimos: " + last_values.toString());
     }
@@ -262,8 +263,8 @@ public class View implements Observer {
 
         mostra_temperatura(temperatura);
         mostra_max_minimo_temperatura(LocalDate.now(), temperatura);
-        mostra_max_minimo_humidade(LocalDate.now(),  humidade );
-        mostra_max_minimo_pressao_atm(LocalDate.now(),pressao_atm);
+        mostra_max_minimo_humidade(LocalDate.now(), humidade);
+        mostra_max_minimo_pressao_atm(LocalDate.now(), pressao_atm);
         mostra_max_minimo_audio(LocalDate.now(), audio);
         mostra_max_minimo_luminosidade(LocalDate.now(), luminosidade);
         mostra_pressao_atm(pressao_atm);
