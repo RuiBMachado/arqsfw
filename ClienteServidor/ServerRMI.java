@@ -31,9 +31,11 @@ public class ServerRMI {
             // Criação e exportação do objecto remoto
             DataStore ds = new DataStore();
             DataStore stub = (DataStore) UnicastRemoteObject.exportObject(ds, 0);
-
+            
+            // simular a recepÃ§Ã£o de valores
             ds.update(1, xdk1_reading_1);
             ds.update(1, xdk1_reading_2);
+            
             // Registo do objecto remoto
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
