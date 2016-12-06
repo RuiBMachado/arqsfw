@@ -3,10 +3,11 @@ package clienteservidor;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.Vector;
 
 public interface DataStoreInterface extends Remote {
     
-    
+    void update(int id, Vector<Integer> values) throws RemoteException;
     String mostra_temperatura() throws RemoteException;
     String mostra_humidade()throws RemoteException;
     String mostra_presao_atm() throws RemoteException;
