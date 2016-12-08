@@ -1,5 +1,6 @@
-package datastore;
+package tp3cliserv;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -7,12 +8,14 @@ import java.util.Vector;
 
 public class ServerRMI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
 
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
+        try {
+            java.rmi.registry.LocateRegistry.createRegistry(5000);
+            System.out.println("RMI registry ready.");
+        } catch (Exception e) {
+            System.out.println("Exception starting RMI registry:");
         }
-        
         try {
             String name = "Storage";
 
@@ -39,7 +42,7 @@ public class ServerRMI {
             ds.update(1, xdk1_reading_2);
 
             // Registo do objecto remoto
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = LocateRegistry.getRegistry(5000);
             registry.rebind(name, stub);
 
             System.out.println("Server ready");

@@ -1,4 +1,4 @@
-package datastore;
+package tp3cliserv;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -10,9 +10,9 @@ public interface DataStoreInterface extends Remote {
     void update(int id, Vector<Integer> values) throws RemoteException;
     String mostra_temperatura() throws RemoteException;
     String mostra_humidade()throws RemoteException;
-    String mostra_presao_atm() throws RemoteException;
+    String mostra_pressao_atm() throws RemoteException;
     String mostra_audio() throws RemoteException;
-    String mostra_luminusidade() throws RemoteException;
+    String mostra_luminosidade() throws RemoteException;
     String mostra_media(LocalDate data, int sensor) throws RemoteException;
     String mostra_max_minimo_temperatura(LocalDate data) throws RemoteException;
     String mostra_max_minimo_humidade(LocalDate data) throws RemoteException;

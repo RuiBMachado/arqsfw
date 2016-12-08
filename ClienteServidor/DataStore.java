@@ -1,6 +1,5 @@
-package datastore;
+package tp3cliserv;
 
-import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,13 +30,83 @@ public class DataStore implements DataStoreInterface {
     }
 
     /**
-     * A estÃ§Ã£o meteriologica recebe updates dos sensores e armazena os
-     * valores na estrutura de dados respectiva.
+     * Actualiza valores de temperatura
+     */
+    void actualizaTemperatura(Vector<Integer> values) {
+        if (this.temperatura.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = temperatura.get(LocalDate.now());
+            val_temp.add(values.elementAt(0));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(0));
+            temperatura.put(LocalDate.now(), new_vector);
+        }
+    }
+    
+    /**
+     * Actualiza valores de humidade
+     */
+    void actualizaHumidade(Vector<Integer> values) {
+        if (this.humidade.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = humidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(1));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(1));
+            humidade.put(LocalDate.now(), new_vector);
+        }
+    }
+    /**
+     * Actualiza valores de pressao
+     */
+    void actualizaPressao_atm(Vector<Integer> values) {
+        if (this.pressao_atm.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
+            val_temp.add(values.elementAt(2));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(2));
+            pressao_atm.put(LocalDate.now(), new_vector);
+        }
+    }
+    
+    /**
+     * Actualiza valores de audio
+     */
+    void actualizaAudio(Vector<Integer> values) {
+
+        if (this.audio.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = audio.get(LocalDate.now());
+            val_temp.add(values.elementAt(3));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(3));
+            audio.put(LocalDate.now(), new_vector);
+        }
+    }
+    /**
+     * Actualiza valores de luminosidade
+     */
+    void actualizaLuminosidade(Vector<Integer> values) {
+
+        if (this.luminosidade.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(4));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(4));
+            luminosidade.put(LocalDate.now(), new_vector);
+        }
+    }
+
+    /**
+     * A estção meteriologica recebe updates dos sensores e armazena os valores
+     * na estrutura de dados respectiva.
      *
      * @param id identificador do sensor XDK
-     * @param values parametros lidos pelo sensor posiÃ§Ã£o 0 : temperatura
-     * posiÃ§Ã£o 1 : humidade posiÃ§Ã£o 2 : pressÃ£o atmosfÃ©ria posiÃ§Ã£o 3 :
-     * audio posiÃ§Ã£o 4 : luminosidade
+     * @param values parametros lidos pelo sensor posição 0 : temperatura
+     * posição 1 : humidade posição 2 : pressão atmosféria posição 3 : audio
+     * posição 4 : luminosidade
      *
      */
     @Override
@@ -46,48 +115,11 @@ public class DataStore implements DataStoreInterface {
         switch (id) {
             case 1: // XDK exterior
 
-                if (this.temperatura.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-                    val_temp.add(values.elementAt(0));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(0));
-                    temperatura.put(LocalDate.now(), new_vector);
-                }
-                if (this.humidade.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = humidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(1));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(1));
-                    humidade.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.pressao_atm.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-                    val_temp.add(values.elementAt(2));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(2));
-                    pressao_atm.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.audio.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = audio.get(LocalDate.now());
-                    val_temp.add(values.elementAt(3));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(3));
-                    audio.put(LocalDate.now(), new_vector);
-                }
-                if (this.luminosidade.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(4));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(4));
-                    luminosidade.put(LocalDate.now(), new_vector);
-                }
+                actualizaTemperatura(values);
+                actualizaHumidade(values);
+                actualizaPressao_atm(values);
+                actualizaAudio(values);
+                actualizaLuminosidade(values);
                 break;
             case 2: // XDK interior
                 ;
@@ -98,12 +130,12 @@ public class DataStore implements DataStoreInterface {
         }
     }
 
+
     /**
-     * Funcionalidade: Mostrar os valores mais recentes dos sensores
+     * Funcionalidade: Mostrar os valores mais recentes da temperatura
      *
      * @return print da temperatura
      */
-    @Override
     public String mostra_temperatura() {
         String r;
         int i = -100;
@@ -118,7 +150,11 @@ public class DataStore implements DataStoreInterface {
         
         return r;
     }
-
+    
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes da humidade
+     *
+     */
     @Override
     public String mostra_humidade() {
         String r;
@@ -134,9 +170,13 @@ public class DataStore implements DataStoreInterface {
         
         return r;
     }
-
+    
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes da pressao atmosferica
+     *
+     */
     @Override
-    public String mostra_presao_atm() {
+    public String mostra_pressao_atm() {
         String r;
         int value = -100;
         LocalDate localDate = LocalDate.now();
@@ -150,6 +190,10 @@ public class DataStore implements DataStoreInterface {
         return r;
     }
 
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes do audio
+     *
+     */
     @Override
     public String mostra_audio() {
         String r;
@@ -166,8 +210,12 @@ public class DataStore implements DataStoreInterface {
         return r;
     }
 
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes da luminosidade
+     *
+     */
     @Override
-    public String mostra_luminusidade() {
+    public String mostra_luminosidade() {
         String r;
         int value = -100;
         LocalDate localDate = LocalDate.now();
@@ -350,5 +398,7 @@ public class DataStore implements DataStoreInterface {
         
         return r;
     }
+
+    
 
 }
