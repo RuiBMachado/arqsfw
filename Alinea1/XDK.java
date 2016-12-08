@@ -41,7 +41,7 @@ public class XDK {
         iot.mostra_max_minimo_pressao_atm(LocalDate.now());
         iot.mostra_max_minimo_audio(LocalDate.now());
         iot.mostra_max_minimo_luminosidade(LocalDate.now());
-        iot.mostra_presao_atm();
+        iot.mostra_pressao_atm();
         iot.mostra_humidade();
         iot.mostra_media(LocalDate.now(),0);
         iot.mostra_ultimos_dias(0,2);

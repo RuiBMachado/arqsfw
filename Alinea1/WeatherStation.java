@@ -37,7 +37,77 @@ public class WeatherStation implements WeatherObserver {
     }
 
     /**
-     * A estção meteriologica recebe updates dos sensores e armazena os valores
+     * Actualiza valores de temperatura
+     */
+    void actualizaTemperatura(Vector<Integer> values) {
+        if (this.temperatura.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = temperatura.get(LocalDate.now());
+            val_temp.add(values.elementAt(0));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(0));
+            temperatura.put(LocalDate.now(), new_vector);
+        }
+    }
+    
+    /**
+     * Actualiza valores de humidade
+     */
+    void actualizaHumidade(Vector<Integer> values) {
+        if (this.humidade.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = humidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(1));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(1));
+            humidade.put(LocalDate.now(), new_vector);
+        }
+    }
+    /**
+     * Actualiza valores de pressao
+     */
+    void actualizaPressao_atm(Vector<Integer> values) {
+        if (this.pressao_atm.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
+            val_temp.add(values.elementAt(2));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(2));
+            pressao_atm.put(LocalDate.now(), new_vector);
+        }
+    }
+    
+    /**
+     * Actualiza valores de audio
+     */
+    void actualizaAudio(Vector<Integer> values) {
+
+        if (this.audio.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = audio.get(LocalDate.now());
+            val_temp.add(values.elementAt(3));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(3));
+            audio.put(LocalDate.now(), new_vector);
+        }
+    }
+    /**
+     * Actualiza valores de luminosidade
+     */
+    void actualizaLuminosidade(Vector<Integer> values) {
+
+        if (this.luminosidade.get(LocalDate.now()) != null) {
+            Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(4));
+        } else {
+            Vector<Integer> new_vector = new Vector<Integer>();
+            new_vector.add(values.elementAt(4));
+            luminosidade.put(LocalDate.now(), new_vector);
+        }
+    }
+
+    /**
+     * A estação meteriologica recebe updates dos sensores e armazena os valores
      * na estrutura de dados respectiva.
      *
      * @param id identificador do sensor XDK
@@ -52,48 +122,11 @@ public class WeatherStation implements WeatherObserver {
         switch (id) {
             case 1: // XDK exterior
 
-                if (this.temperatura.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-                    val_temp.add(values.elementAt(0));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(0));
-                    temperatura.put(LocalDate.now(), new_vector);
-                }
-                if (this.humidade.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = humidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(1));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(1));
-                    humidade.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.pressao_atm.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-                    val_temp.add(values.elementAt(2));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(2));
-                    pressao_atm.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.audio.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = audio.get(LocalDate.now());
-                    val_temp.add(values.elementAt(3));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(3));
-                    audio.put(LocalDate.now(), new_vector);
-                }
-                if (this.luminosidade.get(LocalDate.now()) != null) {
-                    Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(4));
-                } else {
-                    Vector<Integer> new_vector = new Vector<Integer>();
-                    new_vector.add(values.elementAt(4));
-                    luminosidade.put(LocalDate.now(), new_vector);
-                }
+                actualizaTemperatura(values);
+                actualizaHumidade(values);
+                actualizaPressao_atm(values);
+                actualizaAudio(values);
+                actualizaLuminosidade(values);
                 break;
             case 2: // XDK interior
                 ;
@@ -104,10 +137,10 @@ public class WeatherStation implements WeatherObserver {
         }
     }
 
+
     /**
-     * Funcionalidade: Mostrar os valores mais recentes dos sensores
+     * Funcionalidade: Mostrar os valores mais recentes da temperatura
      *
-     * @return print da temperatura
      */
     public void mostra_temperatura() {
         int i = -100;
@@ -120,7 +153,10 @@ public class WeatherStation implements WeatherObserver {
         }
         System.out.println("Temperatura Actual: " + i);
     }
-
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes da humidade
+     *
+     */
     public void mostra_humidade() {
         int value = -100;
         LocalDate localDate = LocalDate.now();
@@ -132,8 +168,11 @@ public class WeatherStation implements WeatherObserver {
         }
         System.out.println("Humidade Actual: " + value);
     }
-
-    public void mostra_presao_atm() {
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes da pressao atmosferica
+     *
+     */
+    public void mostra_pressao_atm() {
         int value = -100;
         LocalDate localDate = LocalDate.now();
         if (pressao_atm.containsKey(localDate)) {
@@ -143,7 +182,10 @@ public class WeatherStation implements WeatherObserver {
         }
         System.out.println("pressão atmosférica actual: " + value);
     }
-
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes de audio
+     *
+     */
     public void mostra_audio() {
         int value = -100;
         LocalDate localDate = LocalDate.now();
@@ -155,8 +197,11 @@ public class WeatherStation implements WeatherObserver {
         }
         System.out.println("Audio actual: " + value);
     }
-
-    public void mostra_luminusidade() {
+    /**
+     * Funcionalidade: Mostrar os valores mais recentes de luminosidade
+     *
+     */
+    public void mostra_luminosidade() {
         int value = -100;
         LocalDate localDate = LocalDate.now();
 
