@@ -1,4 +1,4 @@
-package clienteservidor;
+package datastore;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -8,9 +8,11 @@ import java.util.Vector;
 public class ServerRMI {
 
     public static void main(String[] args) {
+
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
         }
+        
         try {
             String name = "Storage";
 
@@ -29,13 +31,13 @@ public class ServerRMI {
             xdk1_reading_2.add(5);
 
             // Criação e exportação do objecto remoto
-            DataStore ds = new DataStore();
-            DataStore stub = (DataStore) UnicastRemoteObject.exportObject(ds, 0);
-            
+            DataStoreInterface ds = new DataStore();
+            DataStoreInterface stub = (DataStoreInterface) UnicastRemoteObject.exportObject(ds, 0);
+
             // simular a recepÃ§Ã£o de valores
             ds.update(1, xdk1_reading_1);
             ds.update(1, xdk1_reading_2);
-            
+
             // Registo do objecto remoto
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);

@@ -1,4 +1,4 @@
-package clienteservidor;
+package datastore;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
